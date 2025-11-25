@@ -1,6 +1,7 @@
 package com.jmp.movieflix.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,6 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,6 +47,16 @@ public class Movie {
 	@Column(name = "updated_at")
 	private LocalDate updatedAt;
 	
-	
+	 @ManyToMany
+	    @JoinTable(name = "movie_category",  
+	  	joinColumns = @JoinColumn(name="movie_id"), 
+		inverseJoinColumns = @JoinColumn(name="category_id")) 
+	  private List<Category> categories;
+		
+	  @ManyToMany
+	    @JoinTable(name = "movie_streaming",
+		joinColumns = @JoinColumn(name="movie_id"), 
+		inverseJoinColumns = @JoinColumn(name="streaming_id")) 
+	  private List<Streaming> streamings;
 
 }
