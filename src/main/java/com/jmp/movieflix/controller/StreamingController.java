@@ -35,7 +35,7 @@ private final StreamingService streamingService;
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<StreamingResponse> findById(@PathVariable Long id) {
-		Streaming streaming = streamingService.findById(id);
+		Streaming streaming = streamingService.findById(id).orElse(null);
 		if(streaming!=null) {
 			return ResponseEntity.ok(StreamingMapper.toStreamingResponse(streaming));
 		}

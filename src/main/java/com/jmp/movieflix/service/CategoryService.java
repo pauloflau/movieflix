@@ -1,6 +1,7 @@
 package com.jmp.movieflix.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class CategoryService {
 		categoryRepository.deleteById(id);
 	}
 	
-	public Category findById(Long id) {
-		return categoryRepository.findById(id).orElse(null);
+	public Optional<Category> findById(Long id) {
+		return categoryRepository.findById(id);
 	}
 	
 	public Category save(Category category) {

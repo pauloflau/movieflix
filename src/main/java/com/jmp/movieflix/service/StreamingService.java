@@ -1,6 +1,7 @@
 package com.jmp.movieflix.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class StreamingService {
 		streamingRepository.deleteById(id);
 	}
 	
-	public Streaming findById(Long id) {
-		return streamingRepository.findById(id).orElse(null);
+	public Optional<Streaming> findById(Long id) {
+		return streamingRepository.findById(id);
 	}
 	
 	public Streaming save(Streaming streaming) {
