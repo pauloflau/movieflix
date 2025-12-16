@@ -1,5 +1,7 @@
 package com.jmp.movieflix.dtos;
 
-public record CategoryRequest(String name) {
+import jakarta.validation.constraints.NotEmpty;
+
+public record CategoryRequest(@NotEmpty(message="nome da categoria e obrigatorio") String name) {
 
 }

@@ -1,11 +1,14 @@
 package com.jmp.movieflix.config;
 
 import java.time.Instant;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jmp.movieflix.entity.User;
 
 @Component
@@ -25,4 +28,24 @@ public class TokenService {
             .withIssuer("API Moviflix")
             .sign(algorithm);
     }  
+    
+    public Optional<JWTUserData> validateToken(String token) {
+    	try{
+                Algorithm algorithm = Algorithm.HMAC256(secret);
+
+                DecodedJWT jwt = JWT.require(algorithm)
+                        .build()
+                        .verify(token);
+
+               JWTUserData jwtUserData = new JWTUserData();
+               jwtUserData.setUserId(jwt.getClaim("userId").asLong());
+               jwtUserData.setNome(jwt.getClaim("nome").asString());
+               jwtUserData.setEmail(jwt.getSubject());
+                               
+               return Optional.of(jwtUserData);
+                   
+    	} catch (JWTVerificationException ex) {
+                return Optional.empty();
+        }
+    }
 }

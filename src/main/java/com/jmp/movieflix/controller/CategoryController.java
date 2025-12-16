@@ -18,6 +18,7 @@ import com.jmp.movieflix.entity.Category;
 import com.jmp.movieflix.mapper.CategoryMapper;
 import com.jmp.movieflix.service.CategoryService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -43,7 +44,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<CategoryResponse> save(@RequestBody CategoryRequest request) {
+	public ResponseEntity<CategoryResponse> save(@RequestBody @Valid CategoryRequest request) {
 		Category newCategory = CategoryMapper.toCategory(request);
 		Category saveCategory = categoryService.save(newCategory);
 		return ResponseEntity.status(HttpStatus.CREATED).body(CategoryMapper.toCategoryResponse(saveCategory));
