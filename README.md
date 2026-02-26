@@ -52,8 +52,9 @@ A API utiliza Spring Security + JWT, fornecendo:
 
 ---
 
-## ✍️ Autor
+## ✍️ Contato
 
+Caso queira trocar ideias ou sugerir melhorias:  
 **Paulo Flau**
 - 💼 [LinkedIn](https://www.linkedin.com/in/pauloflau/)
 
